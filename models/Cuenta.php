@@ -8,7 +8,7 @@ class Cuenta {
 
     public function __construct(){
 
-        $this->archivo = "../database/Cuenta.json";
+        $this->archivo = "../database/cuenta.json";
 
     }
 
