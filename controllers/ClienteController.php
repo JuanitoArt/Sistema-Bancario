@@ -2,6 +2,7 @@
 
 
 require_once __DIR__ . '/../models/Cliente.php';
+require_once __DIR__ . '/../models/Cuenta.php';
 
 
 
@@ -172,11 +173,30 @@ class ClienteController
 
 
 
-    public function eliminar($id)
+   public function eliminar($id)
 {
 
-    $eliminado = $this->modelo->eliminar($id);
+    $cuentaModel = new Cuenta();
 
+    $cuentas = $cuentaModel->obtenerTodos();
+
+    foreach ($cuentas as $cuenta) {
+
+        if ($cuenta["id_cliente"] == $id) {
+
+            return [
+
+                "success" => false,
+
+                "mensaje" => "No se puede eliminar el cliente porque tiene cuentas asociadas."
+
+            ];
+
+        }
+
+    }
+
+    $eliminado = $this->modelo->eliminar($id);
 
     return [
 
@@ -189,7 +209,6 @@ class ClienteController
     ];
 
 }
-
 
 
 }

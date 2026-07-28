@@ -1,1 +1,29 @@
-[]
+[
+    {
+        "id": 1,
+        "tipo": "Depósito",
+        "valor": 2000000,
+        "cuenta_origen": "100001",
+        "cuenta_destino": null,
+        "fecha": "2026-07-28 05:17:18",
+        "estado": "Completada"
+    },
+    {
+        "id": 2,
+        "tipo": "Retiro",
+        "valor": 1000000,
+        "cuenta_origen": "100001",
+        "cuenta_destino": null,
+        "fecha": "2026-07-28 05:20:11",
+        "estado": "Completada"
+    },
+    {
+        "id": 3,
+        "tipo": "Transferencia",
+        "valor": 500000,
+        "cuenta_origen": "100001",
+        "cuenta_destino": "100002",
+        "fecha": "2026-07-28 05:23:15",
+        "estado": "Completada"
+    }
+]

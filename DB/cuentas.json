@@ -1,1 +1,20 @@
-[]
+[
+    {
+        "id": 1,
+        "numero_cuenta": "100001",
+        "tipo": "Corriente",
+        "saldo": 1500000,
+        "id_cliente": 1,
+        "fechaCreacion": "2026-07-28 01:51:05",
+        "estado": "Activa"
+    },
+    {
+        "id": 2,
+        "numero_cuenta": "100002",
+        "tipo": "Ahorros",
+        "saldo": 1500000,
+        "id_cliente": 2,
+        "fechaCreacion": "2026-07-28 05:22:33",
+        "estado": "Activa"
+    }
+]

@@ -1,9 +1,10 @@
 <?php
 
+
+
 require_once __DIR__ . "/../../controllers/ClienteController.php";
 
 $controller = new ClienteController();
-
 
 if(isset($_GET["accion"]) && $_GET["accion"] == "eliminar"){
 
@@ -11,6 +12,8 @@ if(isset($_GET["accion"]) && $_GET["accion"] == "eliminar"){
 
     $resultado = $controller->eliminar($id);
 
+    $_SESSION["mensaje"] = $resultado["mensaje"];
+    $_SESSION["success"] = $resultado["success"];
 
     header("Location: /Sistema-Bancario/index.php?vista=clientes");
 
@@ -18,12 +21,9 @@ if(isset($_GET["accion"]) && $_GET["accion"] == "eliminar"){
 
 }
 
-
-
 $clientes = $controller->listar();
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -34,17 +34,15 @@ $clientes = $controller->listar();
 
 <title>Clientes</title>
 
-
 <style>
 
 body{
 
-    font-family:Arial, sans-serif;
+    font-family: Arial, sans-serif;
     margin:40px;
     background:#f4f4f4;
 
 }
-
 
 .contenedor{
 
@@ -54,28 +52,22 @@ body{
 
 }
 
-
-
 h1{
 
     text-align:center;
 
 }
 
-
-
 .boton{
 
     display:inline-block;
-    background:#0d6efd;
+    background:#198754;
     color:white;
     padding:10px 15px;
     text-decoration:none;
     border-radius:5px;
 
 }
-
-
 
 table{
 
@@ -85,16 +77,12 @@ table{
 
 }
 
-
-
 th{
 
     background:#0d6efd;
     color:white;
 
 }
-
-
 
 th, td{
 
@@ -104,37 +92,72 @@ th, td{
 
 }
 
-
-
 .editar{
 
     color:green;
+    text-decoration:none;
 
 }
-
-
 
 .eliminar{
 
     color:red;
+    text-decoration:none;
 
 }
 
+.mensaje{
+
+    padding:12px;
+    margin-bottom:20px;
+    border-radius:6px;
+    text-align:center;
+    font-weight:bold;
+
+}
+
+.exito{
+
+    background:#d1e7dd;
+    color:#0f5132;
+
+}
+
+.error{
+
+    background:#f8d7da;
+    color:#842029;
+
+}
 
 </style>
 
-
 </head>
-
 
 <body>
 
-
 <div class="contenedor">
 
+<h1>Sistema Bancario</h1>
 
-<h1>Clientes Registrados</h1>
+<?php require_once __DIR__ . '/../layout/menu.php'; ?>
 
+<?php
+
+if(isset($_SESSION["mensaje"])){
+
+    $clase = $_SESSION["success"] ? "exito" : "error";
+
+    echo "<div class='mensaje $clase'>".$_SESSION["mensaje"]."</div>";
+
+    unset($_SESSION["mensaje"]);
+    unset($_SESSION["success"]);
+
+}
+
+?>
+
+<h2 style="text-align:center;">Clientes Registrados</h2>
 
 <a class="boton" href="/Sistema-Bancario/index.php?vista=crearCliente">
 
@@ -142,10 +165,7 @@ th, td{
 
 </a>
 
-
-
 <table>
-
 
 <tr>
 
@@ -165,13 +185,9 @@ th, td{
 
 <th>Acciones</th>
 
-
 </tr>
 
-
-
 <?php if(empty($clientes)): ?>
-
 
 <tr>
 
@@ -183,106 +199,58 @@ No hay clientes registrados.
 
 </tr>
 
-
-
 <?php else: ?>
-
-
 
 <?php foreach($clientes as $cliente): ?>
 
-
 <tr>
 
+<td><?= $cliente["id"] ?></td>
+
+<td><?= $cliente["nombre"] ?></td>
+
+<td><?= $cliente["apellido"] ?></td>
+
+<td><?= $cliente["documento"] ?></td>
+
+<td><?= $cliente["telefono"] ?></td>
+
+<td><?= $cliente["correo"] ?></td>
+
+<td><?= $cliente["estado"] ?></td>
 
 <td>
 
-<?= $cliente["id"] ?>
-
-</td>
-
-
-<td>
-
-<?= $cliente["nombre"] ?>
-
-</td>
-
-
-<td>
-
-<?= $cliente["apellido"] ?>
-
-</td>
-
-
-<td>
-
-<?= $cliente["documento"] ?>
-
-</td>
-
-
-<td>
-
-<?= $cliente["telefono"] ?>
-
-</td>
-
-
-<td>
-
-<?= $cliente["correo"] ?>
-
-</td>
-
-
-<td>
-
-<?= $cliente["estado"] ?>
-
-</td>
-
-
-
-<td>
-
-
-<a class="editar" href="/Sistema-Bancario/index.php?vista=editarCliente&id=<?= $cliente["id"] ?>">
+<a
+class="editar"
+href="/Sistema-Bancario/index.php?vista=editarCliente&id=<?= $cliente["id"] ?>">
 
 Editar
 
 </a>
 
-
 |
 
-<a 
+<a
 class="eliminar"
 href="/Sistema-Bancario/index.php?vista=clientes&accion=eliminar&id=<?= $cliente["id"] ?>"
-onclick="return confirm('¿Seguro que desea eliminar este cliente?')"
->
-Eliminar
-</a>
+onclick="return confirm('¿Seguro que desea eliminar este cliente?')">
 
+Eliminar
+
+</a>
 
 </td>
 
-
 </tr>
-
 
 <?php endforeach; ?>
 
-
 <?php endif; ?>
-
 
 </table>
 
-
 </div>
-
 
 </body>
 

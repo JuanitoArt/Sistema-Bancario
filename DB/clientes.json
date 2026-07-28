@@ -18,15 +18,5 @@
         "correo": "juanito@gmail.com",
         "fechaRegistro": "2026-07-27 16:14:54",
         "estado": "Activo"
-    },
-    {
-        "id": 3,
-        "nombre": "Juan",
-        "apellido": "Galvis",
-        "documento": "1070958970",
-        "telefono": "3108138363",
-        "correo": "juanandresgalvisbejarano@gmail.com",
-        "fechaRegistro": "2026-07-27 17:52:56",
-        "estado": "Activo"
     }
 ]
